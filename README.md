@@ -29,9 +29,14 @@ Things you may want to cover:
 
 | Column         | Type   | Options     |
 | --------       | ------ | ----------- |
-| users_name     | string | null: false |
-| users_email    | string | null: false |
-| users_password | string | null: false |
+| users_nickname        | string | null: false |
+| users_last_name       | string | null: false |
+| users_first_name      | string | null: false |
+| users_last_name_kana  | string | null: false |
+| users_first_name_kana | string | null: false |
+| users_birthday        | string | null: false |
+| users_email           | string | null: false |
+| users_password        | string | null: false |
 
 ### Association
 
@@ -40,50 +45,48 @@ Things you may want to cover:
 
 ## items テーブル
 
-| Column               | Type   | Options                        |
-| ------               | ------ | -----------                    |
-| items_user_id        | string | null: false, foreign_key: true |
-| items_name           | string | null: false                    |
-| items_category       | string | null: false                    |
-| items_condition      | string | null: false                    |
-| items_text           | string | null: false                    |
-| items_image          | string | null: false                    |
-| items_area           | string | null: false                    |
-| items_days           | string | null: false                    |
-| items_price          | string | null: false                    |
-| items_delivery_fee   | string | null: false                    |
+| Column              | Type       | Options                        |
+| ------              | ------     | -----------                    |
+| items_user          | references | null: false, foreign_key: true |
+| items_name          | string     | null: false                    |
+| items_category_id   | integer    | null: false                    |
+| items_condition_id  | integer    | null: false                    |
+| items_text          | text       | null: false                    |
+| items_prefecture_id | integer    | null: false                    |
+| items_day_id        | integer    | null: false                    |
+| items_price         | integer    | null: false                    |
+| items_delivery_fee  | string     | null: false                    |
 
 
 ### Association
 
-- has_one :purchase_records
-- belongs_to :users
+- has_one :purchase_record
+- belongs_to :user
 
 ## purchase_records テーブル
 
-| Column                               | Type       | Options                        |
-| ------                               | ---------- | ------------------------------ |
-| purchase_records_user_id             | string     | null: false, foreign_key: true |
-| purchase_records_items_id            | string     | null: false, foreign_key: true |
-| purchase_records_user                | string     | null: false                    |
-| purchase_records_items               | string     | null: false                    |
+| Column                 | Type       | Options                        |
+| ------                 | ---------- | ------------------------------ |
+| purchases_record_user  | references | null: false, foreign_key: true |
+| purchases_record_item  | references | null: false, foreign_key: true |
 
 ### Association
 
-- has_one :addresses
-- belongs_to :users
+- has_one :addresse
+- belongs_to :user
 
 ## addresses テーブル
 
-| Column                         | Type       | Options                        |
-| -------                        | ---------- | ------------------------------ |
-| addressespurchase_records_id   | string     | null: false, foreign_key: true |
-| addresses_prefectures          | string     | null: false                    |
-| addresses_municipality         | string     | null: false                    |
-| addresses_street               | string     | null: false                    |
-| addresses_post                 | string     | null: false                    |
-| addresses_phone                | string     | null: false                    |
+| Column                    | Type           | Options                        |
+| -------                   | ----------     | ------------------------------ |
+| addresses_purchase_record | references     | null: false, foreign_key: true |
+| addresses_prefecture_id   | integer        | null: false                    |
+| addresses_municipality    | string         | null: false                    |
+| addresses_street          | string         | null: false                    |
+| addresses_buildings       | string         |                                |
+| addresses_post            | string         | null: false                    |
+| addresses_phone           | string         | null: false                    |
 
 ### Association
 
-- belongs_to :purchase_records
+- belongs_to :purchase_record
