@@ -29,14 +29,14 @@ Things you may want to cover:
 
 | Column         | Type   | Options     |
 | --------       | ------ | ----------- |
-| users_nickname        | string | null: false |
-| users_last_name       | string | null: false |
-| users_first_name      | string | null: false |
-| users_last_name_kana  | string | null: false |
-| users_first_name_kana | string | null: false |
-| users_birthday        | string | null: false |
-| users_email           | string | null: false |
-| users_password        | string | null: false |
+| nickname        | string | null: false |
+| last_name       | string | null: false |
+| first_name      | string | null: false |
+| last_name_kana  | string | null: false |
+| first_name_kana | string | null: false |
+| birthday        | string | null: false |
+| email           | string | null: false |
+| encrypted_password        | string | null: false |
 
 ### Association
 
@@ -47,15 +47,15 @@ Things you may want to cover:
 
 | Column              | Type       | Options                        |
 | ------              | ------     | -----------                    |
-| items_user          | references | null: false, foreign_key: true |
-| items_name          | string     | null: false                    |
-| items_category_id   | integer    | null: false                    |
-| items_condition_id  | integer    | null: false                    |
-| items_text          | text       | null: false                    |
-| items_prefecture_id | integer    | null: false                    |
-| items_day_id        | integer    | null: false                    |
-| items_price         | integer    | null: false                    |
-| items_delivery_fee  | string     | null: false                    |
+| user          | references | null: false, foreign_key: true |
+| name          | string     | null: false                    |
+| category_id   | integer    | null: false                    |
+| condition_id  | integer    | null: false                    |
+| text          | text       | null: false                    |
+| prefecture_id | integer    | null: false                    |
+| day_id        | integer    | null: false                    |
+| price         | integer    | null: false                    |
+| delivery_fee_id  | integer     | null: false                    |
 
 
 ### Association
@@ -67,25 +67,26 @@ Things you may want to cover:
 
 | Column                 | Type       | Options                        |
 | ------                 | ---------- | ------------------------------ |
-| purchases_record_user  | references | null: false, foreign_key: true |
-| purchases_record_item  | references | null: false, foreign_key: true |
+| record_user  | references | null: false, foreign_key: true |
+| record_item  | references | null: false, foreign_key: true |
 
 ### Association
 
 - has_one :addresse
 - belongs_to :user
+- belongs_to :item
 
 ## addresses テーブル
 
 | Column                    | Type           | Options                        |
 | -------                   | ----------     | ------------------------------ |
-| addresses_purchase_record | references     | null: false, foreign_key: true |
-| addresses_prefecture_id   | integer        | null: false                    |
-| addresses_municipality    | string         | null: false                    |
-| addresses_street          | string         | null: false                    |
-| addresses_buildings       | string         |                                |
-| addresses_post            | string         | null: false                    |
-| addresses_phone           | string         | null: false                    |
+| purchase_record | references     | null: false, foreign_key: true |
+| prefecture_id   | integer        | null: false                    |
+| municipality    | string         | null: false                    |
+| street          | string         | null: false                    |
+| buildings       | string         |                                |
+| post            | string         | null: false                    |
+| phone           | string         | null: false                    |
 
 ### Association
 
