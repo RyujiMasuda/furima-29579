@@ -72,7 +72,7 @@ Things you may want to cover:
 
 ### Association
 
-- has_one :addresse
+- has_one :address
 - belongs_to :user
 - belongs_to :item
 
