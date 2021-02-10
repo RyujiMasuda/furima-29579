@@ -6,16 +6,7 @@ describe User do
 
   describe 'ユーザー新規登録' do
     context '新規登録がうまくいくとき' do
-      it "nicknameとemail、passwordとpassword_confirmationが存在すれば登録できる" do
-        expect(@user).to be_valid
-      end
-      it "nicknameが6文字以下で登録できる" do
-        @user.nickname = "aaaaaa"
-        expect(@user).to be_valid
-      end
-      it "passwordが6文字以上であれば登録できる" do
-        @user.password = "000000"
-        @user.password_confirmation = "000000"
+      it "nicknameとemail、passwordとpassword_confirmation、ユーザー本名（名字・名前、漢字・ひらがな・カタカナで）、ユーザー本名のフリガナ（名字・名前、全角カタカナ）、生年月日が存在すれば登録できる" do
         expect(@user).to be_valid
       end
     end
@@ -59,6 +50,41 @@ describe User do
         @user.password_confirmation = ""
         @user.valid?
         expect(@user.errors.full_messages).to include("Password confirmation doesn't match Password")
+      end
+      it "ユーザーの名字が空では登録できない" do
+        @user.last_name = ""
+        @user.valid?
+        expect(@user.errors.full_messages).to include("Last name can't be blank", "Last name is invalid")
+      end
+      it "ユーザーの名前が空では登録できない" do
+        @user.first_name = ""
+        @user.valid?
+        expect(@user.errors.full_messages).to include("First name can't be blank", "First name is invalid")
+      end
+      it "ユーザーの名字が漢字・ひらがな・カタカナでなければ登録できない" do
+        @user.last_name = "Masuda"
+        @user.valid?
+        expect(@user.errors.full_messages).to include("Last name is invalid")
+      end
+      it "ユーザーの名前が漢字・ひらがな・カタカナでなければ登録できない" do
+        @user.first_name = "Ryuji"
+        @user.valid?
+        expect(@user.errors.full_messages).to include("First name is invalid")
+      end
+      it "ユーザーの名字（フリガナ）が漢字・ひらがな・カタカナでなければ登録できない" do
+        @user.last_name_kana = "増田"
+        @user.valid?
+        expect(@user.errors.full_messages).to include("Last name kana is invalid")
+      end
+      it "ユーザーの名字（フリガナ）が全角カタカナでなければ登録できない" do
+        @user.first_name_kana = "竜士"
+        @user.valid?
+        expect(@user.errors.full_messages).to include("First name kana is invalid")
+      end
+      it "生年月日が空では登録できない" do
+        @user.birthday = ""
+        @user.valid?
+        expect(@user.errors.full_messages).to include("Birthday can't be blank")
       end
     end
   end
