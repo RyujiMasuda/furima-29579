@@ -5,7 +5,7 @@ class User < ApplicationRecord
          :recoverable, :rememberable, :validatable
 
   validates :nickname, presence: true, length: { maximum: 6 }
-  with_options presence: true, format: { with: /\A[ぁ-んァ-ン一-龥]/} do
+  with_options presence: true, format: { with: /\A(?:\p{Hiragana}|\p{Katakana}|[ー－]|[一-龠々])+\z/} do
     validates :first_name
     validates :last_name
   end
