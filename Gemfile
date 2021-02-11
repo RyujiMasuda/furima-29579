@@ -68,3 +68,5 @@ gem 'faker'
 gem 'pry-rails'
 
 gem 'mini_magick'
+
+gem 'active_hash'
