@@ -1,17 +1,17 @@
 require 'rails_helper'
-describe User do
+describe Item do
   before do
     @item = FactoryBot.build(:item)
   end
 
-  describe 'ユーザー新規登録' do
+  describe '商品出品機能' do
     context '商品出品がうまくいくとき' do
       it "userと紐づいていて, name, text, category_id, condition_id, prefecture_id, day_id, delivery_fee_id, priceが存在すれば登録できる" do
         expect(@item).to be_valid
       end
     end
 
-    context '新規登録がうまくいかないとき' do
+    context '商品出品がうまくいかないとき' do
       it "ユーザーと紐づいていないと登録できない" do
       @item.user = nil
       @item.valid?
