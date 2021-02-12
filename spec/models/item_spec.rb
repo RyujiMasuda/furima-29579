@@ -38,12 +38,12 @@ describe Item do
         expect(@item.errors.full_messages).to include("Price is not a number")
       end
       it "priceが300以下だと登録できない" do
-        @item.price = "299"
+        @item.price = 299
         @item.valid?
         expect(@item.errors.full_messages).to include("Price must be greater than or equal to 300")
       end
       it "priceが9,999,999以上だと登録できない" do
-        @item.price = "10000000"
+        @item.price = 10000000
         @item.valid?
         expect(@item.errors.full_messages).to include("Price must be less than or equal to 9999999")
       end
@@ -53,7 +53,7 @@ describe Item do
         expect(@item.errors.full_messages).to include("Category can't be blank")
       end
       it "category_idが1の時は登録できない" do
-        @item.category_id = "1"
+        @item.category_id = 1
         @item.valid?
         expect(@item.errors.full_messages).to include("Category select")
       end
@@ -63,7 +63,7 @@ describe Item do
         expect(@item.errors.full_messages).to include("Condition can't be blank")
       end
       it "condition_idが1の時は登録できない" do
-        @item.condition_id = "1"
+        @item.condition_id = 1
         @item.valid?
         expect(@item.errors.full_messages).to include("Condition select")
       end
@@ -73,7 +73,7 @@ describe Item do
         expect(@item.errors.full_messages).to include("Prefecture can't be blank")
       end
       it "prefecture_idが1の時は登録できない" do
-        @item.prefecture_id = "1"
+        @item.prefecture_id = 1
         @item.valid?
         expect(@item.errors.full_messages).to include("Prefecture select")
       end
@@ -83,7 +83,7 @@ describe Item do
         expect(@item.errors.full_messages).to include("Day can't be blank")
       end
       it "day_idが1の時は登録できない" do
-        @item.day_id = "1"
+        @item.day_id = 1
         @item.valid?
         expect(@item.errors.full_messages).to include("Day select")
       end
@@ -93,9 +93,14 @@ describe Item do
         expect(@item.errors.full_messages).to include("Delivery fee can't be blank")
       end
       it "delivery_fee_idが1の時は登録できない" do
-        @item.delivery_fee_id = "1"
+        @item.delivery_fee_id = 1
         @item.valid?
         expect(@item.errors.full_messages).to include("Delivery fee select")
+      end
+      it "imageが空では登録できない" do
+        @item.image = nil
+        @item.valid?
+        expect(@item.errors.full_messages).to include("Image can't be blank")
       end
     end
   end
