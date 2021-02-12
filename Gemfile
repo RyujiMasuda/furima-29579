@@ -70,3 +70,5 @@ gem 'pry-rails'
 gem 'mini_magick'
 
 gem 'active_hash'
+
+gem 'image_processing', '~> 1.2'
