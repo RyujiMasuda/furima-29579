@@ -66,3 +66,9 @@ gem 'factory_bot_rails'
 gem 'faker'
 
 gem 'pry-rails'
+
+gem 'mini_magick'
+
+gem 'active_hash'
+
+gem 'image_processing', '~> 1.2'
