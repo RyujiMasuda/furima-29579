@@ -10,7 +10,7 @@ describe PurchaseRecordForm do
 
   describe '商品購入機能' do
     context '商品購入がうまくいくとき' do
-      it "user,itemと紐づいていて, prefecture_id, municipality, street, building, post, phoneが存在すれば登録できる" do
+      it "user,itemと紐づいていて, prefecture_id, municipality, street, building, post, phone, tokenが存在すれば登録できる" do
         expect(@purchase_record_form).to be_valid
       end
     end
@@ -65,6 +65,11 @@ describe PurchaseRecordForm do
         @purchase_record_form.phone = "080438732100"
         @purchase_record_form.valid?
         expect(@purchase_record_form.errors.full_messages).to include("Phone is invalid")
+      end
+      it "tokenが空では登録できないこと" do
+        @purchase_record_form.token = nil
+        @purchase_record_form.valid?
+        expect(@purchase_record_form.errors.full_messages).to include("Token can't be blank")
       end
     end
   end
