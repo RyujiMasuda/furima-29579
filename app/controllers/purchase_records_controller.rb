@@ -3,6 +3,9 @@ class PurchaseRecordsController < ApplicationController
   def index
     @purchase_record_form = PurchaseRecordForm.new
     @item = Item.find(params[:item_id])
+    if @item.purchase_record != nil || current_user.id == @item.user.id
+      redirect_to root_path
+    end
   end
 
   def create
