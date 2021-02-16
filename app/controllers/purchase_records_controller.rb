@@ -9,8 +9,9 @@ class PurchaseRecordsController < ApplicationController
     @item = Item.find(params[:item_id])
     @purchase_record_form = PurchaseRecordForm.new(purchase_record_form_params)
     if @purchase_record_form.valid?
+      pay_item
       @purchase_record_form.save
-      redirect_to root_path
+      return redirect_to root_path
     else
       render :index
     end
@@ -27,7 +28,16 @@ class PurchaseRecordsController < ApplicationController
       :building, 
       :post, 
       :phone, 
-    ).merge(user_id: current_user.id, item_id: params[:item_id])
+    ).merge(user_id: current_user.id, item_id: params[:item_id], token: params[:token])
+  end
+
+  def pay_item
+      Payjp.api_key = ENV["PAYJP_SECRET_KEY"]
+      Payjp::Charge.create(
+        amount: @item.price,
+        card: purchase_record_form_params[:token],
+        currency: 'jpy'
+      )
   end
 
 end
