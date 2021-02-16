@@ -13,6 +13,10 @@ describe PurchaseRecordForm do
       it "user,itemと紐づいていて, prefecture_id, municipality, street, building, post, phone, tokenが存在すれば登録できる" do
         expect(@purchase_record_form).to be_valid
       end
+      it "建物名が空でも登録できる" do
+        @purchase_record_form.building = ""
+        expect(@purchase_record_form).to be_valid
+      end
     end
 
     context '商品購入がうまくいかないとき' do
