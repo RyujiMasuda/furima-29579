@@ -1,4 +1,5 @@
 class PurchaseRecordsController < ApplicationController
+  before_action :authenticate_user!, except: [:index, :create]
 
   def index
     @purchase_record_form = PurchaseRecordForm.new
