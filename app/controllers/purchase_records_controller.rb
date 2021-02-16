@@ -3,10 +3,10 @@ class PurchaseRecordsController < ApplicationController
   before_action :set_item
 
   def index
-    @purchase_record_form = PurchaseRecordForm.new
     if @item.purchase_record != nil || current_user.id == @item.user.id
       redirect_to root_path
     end
+    @purchase_record_form = PurchaseRecordForm.new
   end
 
   def create
