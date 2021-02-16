@@ -31,6 +31,11 @@ describe PurchaseRecordForm do
         @purchase_record_form.valid?
         expect(@purchase_record_form.errors.full_messages).to include("Prefecture can't be blank", "Prefecture can't be blank")
       end
+      it "prefecture_idが1の時は登録できない" do
+        @purchase_record_form.prefecture_id = 1
+        @purchase_record_form.valid?
+        expect(@purchase_record_form.errors.full_messages).to include("Prefecture can't be blank")
+      end
       it "municipalityが空では登録できない" do
         @purchase_record_form.municipality = ""
         @purchase_record_form.valid?
